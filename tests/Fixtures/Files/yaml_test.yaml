@@ -1,0 +1,8 @@
+services:
+    test_bundle.test_service:
+        class: TestBundle/TestClass
+        arguments:
+            - test
+        factory:
+            - FactoryClass
+            - factoryMethod

@@ -1,0 +1,42 @@
+{
+  "name": "metglobal/symfony-autodi-yaml",
+  "description": "A composer script generates services.yml from class annotations.",
+  "type": "library",
+  "keywords": [
+    "annotations",
+    "dependency injection",
+    "service injection"
+  ],
+  "require": {
+    "php": ">=7.0",
+    "doctrine/annotations": "^1.4",
+    "symfony/yaml": "~2.1",
+    "symfony/finder": "^2.8"
+  },
+  "require-dev": {
+    "composer/composer": "1.0.*@dev",
+    "phpunit/phpunit": "5.*"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0.x-dev"
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "SymfonyAutoDiYml\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "SymfonyAutoDiYml\\Tests\\": "tests/"
+    }
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Seyfi Aslan",
+      "email": "seyfiaslangecinen@gmail.com"
+    }
+  ]
+}

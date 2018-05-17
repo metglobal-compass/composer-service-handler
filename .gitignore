@@ -1,0 +1,4 @@
+vendor
+.idea
+composer.lock
+tests/files/yaml_test.yaml
