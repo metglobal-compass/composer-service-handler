@@ -23,6 +23,8 @@ class DITest extends BaseTestCase
         $di->public = true;
         $di->abstract = false;
         $di->parent = '@test_parent_dependency';
+        $di->autoconfigure = false;
+        $di->autowire = true;
 
         $actual = $di->toYamlArray();
 
@@ -39,6 +41,9 @@ class DITest extends BaseTestCase
             'public' => true,
             'abstract' => false,
             'parent' => '@test_parent_dependency',
+            'autoconfigure' => false,
+            'autowire' => true,
+
         ];
 
         $this->assertEquals($expected, $actual);

@@ -57,6 +57,16 @@ final class DI implements YamlConvertable
     public $parent;
 
     /**
+     * @var bool
+     */
+    public $autowire;
+
+    /**
+     * @var false
+     */
+    public $autoconfigure;
+
+    /**
      * @inheritDoc
      */
     public function toYamlArray()
@@ -65,7 +75,7 @@ final class DI implements YamlConvertable
             'class' => $this->class,
         ];
 
-        $optionalFields = ['arguments', 'factory', 'calls', 'public', 'abstract', 'parent'];
+        $optionalFields = ['arguments', 'factory', 'calls', 'public', 'abstract', 'parent', 'autowire', 'autoconfigure'];
 
         foreach ($optionalFields as $field) {
             if ($this->$field !== null) {
