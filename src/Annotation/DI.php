@@ -62,7 +62,7 @@ final class DI implements YamlConvertable
     public $autowire;
 
     /**
-     * @var false
+     * @var bool
      */
     public $autoconfigure;
 

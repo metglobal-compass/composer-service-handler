@@ -20,6 +20,8 @@ use SymfonyAutoDiYml\Annotation\Tag;
  *     tags={
  *      @Tag(name="tag_name", event="eventName", method="eventMethod")
  *     },
+ *     autoconfigure=false,
+ *     autowire=true
  * )
  * @package SymfonyAutoDiYml\Tests\Annotation
  */
