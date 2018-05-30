@@ -21,7 +21,6 @@ class AnnotationFinderTest extends BaseTestCase
 {
     /**
      * @throws \Doctrine\Common\Annotations\AnnotationException
-     * @throws \ReflectionException
      */
     public function testSimpleCase()
     {
@@ -38,7 +37,6 @@ class AnnotationFinderTest extends BaseTestCase
      * Configuration class test case for another class
      *
      * @throws \Doctrine\Common\Annotations\AnnotationException
-     * @throws \ReflectionException
      */
     public function testConfigClassCase()
     {
@@ -55,7 +53,6 @@ class AnnotationFinderTest extends BaseTestCase
      * A non-sense but complex test case to ensure all cases works fine
      *
      * @throws \Doctrine\Common\Annotations\AnnotationException
-     * @throws \ReflectionException
      */
     public function testComplexClassCase()
     {
@@ -89,5 +86,29 @@ class AnnotationFinderTest extends BaseTestCase
         $annotationFinder = new AnnotationFinder(new AnnotationReader(), new Reflector());
 
         $annotation = $annotationFinder->findDiAnnotation(WrongClass::class);
+    }
+
+    /**
+     * Annotation finder must return null if reflection expection throws
+     *
+     * @throws \Doctrine\Common\Annotations\AnnotationException
+     */
+    public function testReflectionExceptionCase()
+    {
+        $reflectorMock = $this
+            ->getMockBuilder(Reflector::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $reflectorMock
+            ->expects($this->exactly(1))
+            ->method("getReflectionClass")
+            ->with(SimpleClass::class)
+            ->willThrowException(new \ReflectionException());
+
+        $annotationFinder = new AnnotationFinder(new AnnotationReader(), $reflectorMock);
+        $annotation = $annotationFinder->findDiAnnotation(SimpleClass::class);
+
+        $this->assertNull($annotation);
     }
 }

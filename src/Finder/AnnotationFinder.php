@@ -38,20 +38,23 @@ class AnnotationFinder
     /**
      * @param $className
      * @return null|DI
-     * @throws \ReflectionException
      */
     public function findDiAnnotation($className)
     {
-        $reflectionClass = $this->reflector->getReflectionClass($className);
+        try {
+            $reflectionClass = $this->reflector->getReflectionClass($className);
 
-        /** @var DI $annotation */
-        $annotation = $this->annotationReader->getClassAnnotation($reflectionClass, DI::class);
+            /** @var DI $annotation */
+            $annotation = $this->annotationReader->getClassAnnotation($reflectionClass, DI::class);
 
-        // Set self class name if annotation class field is null
-        if ($annotation != null && $annotation->class == null) {
-            $annotation->class = $className;
+            // Set self class name if annotation class field is null
+            if ($annotation != null && $annotation->class == null) {
+                $annotation->class = $className;
+            }
+
+            return $annotation;
+        } catch (\ReflectionException $e) {
+            return null;
         }
-
-        return $annotation;
     }
 }
