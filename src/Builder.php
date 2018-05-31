@@ -95,7 +95,7 @@ class Builder
         $dependencyFinder = new DependencyFinder($phpClassFinder, $annotationFinder);
         $yamlWriter = new YamlWriter();
 
-        $builder = new Builder($configFinder, $dependencyFinder, $yamlWriter);
+        $builder = new Builder($configFinder, $dependencyFinder, $yamlWriter, new YamlParser());
         $builder->build();
     }
 }
