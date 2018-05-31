@@ -13,6 +13,7 @@ class TagTest extends BaseTestCase
         $tag->name = "test_tag_name";
         $tag->event = "test_tag_event";
         $tag->method = "test_tag_method";
+        $tag->priority = 5;
 
         $actual = $tag->toYamlArray();
 
@@ -20,6 +21,7 @@ class TagTest extends BaseTestCase
             'name' => 'test_tag_name',
             'event' => 'test_tag_event',
             'method' => 'test_tag_method',
+            'priority' => 5,
         ];
 
         $this->assertEquals($expected, $actual);

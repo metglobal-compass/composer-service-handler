@@ -26,6 +26,11 @@ class Tag implements YamlConvertable
     public $method;
 
     /**
+     * @var int
+     */
+    public $priority;
+
+    /**
      * @inheritDoc
      */
     public function toYamlArray()
@@ -40,6 +45,10 @@ class Tag implements YamlConvertable
 
         if ($this->method != null) {
             $item['method'] = $this->method;
+        }
+
+        if ($this->priority != null) {
+            $item['priority'] = $this->priority;
         }
 
         return $item;

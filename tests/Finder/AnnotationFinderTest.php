@@ -73,6 +73,7 @@ class AnnotationFinderTest extends BaseTestCase
         $tag->name = "tag_name";
         $tag->event = "eventName";
         $tag->method = "eventMethod";
+        $tag->priority = 15;
         $this->assertEquals([$tag], $annotation->tags);
     }
 
