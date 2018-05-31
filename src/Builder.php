@@ -32,20 +32,23 @@ class Builder
     private $yamlWriter;
 
     /**
+     * @var YamlParser
+     */
+    private $yamlParser;
+
+    /**
      * Builder constructor.
-     * @param Event $event
      * @param ConfigFinder $configFinder
      * @param DependencyFinder $dependencyFinder
      * @param YamlWriter $yamlWriter
+     * @param YamlParser $yamlParser
      */
-    public function __construct(
-        ConfigFinder $configFinder,
-        DependencyFinder $dependencyFinder,
-        YamlWriter $yamlWriter
-    ) {
+    public function __construct(ConfigFinder $configFinder, DependencyFinder $dependencyFinder, YamlWriter $yamlWriter, YamlParser $yamlParser)
+    {
         $this->configFinder = $configFinder;
         $this->dependencyFinder = $dependencyFinder;
-        $this->ymlWriter = $yamlWriter;
+        $this->yamlWriter = $yamlWriter;
+        $this->yamlParser = $yamlParser;
     }
 
     /**
@@ -65,9 +68,17 @@ class Builder
                 return $dependency->toYamlArray();
             }, $dependencies);
 
+            // Read yaml dist
+            $distPath = sprintf('%s/Resources/config/services.dist.yml', $bundleDir);
+            $yaml = $this->yamlParser->parse($distPath);
+            $yaml = $yaml ? $yaml : ['services' => []];
+
+            // Merge dist and dependencies
+            $yaml['services'] = array_merge($yaml['services'], $dependencies);
+
             // Write yaml to files
-            $yamlPath = sprintf('%s/Resources/config/services_di.yml', $bundleDir);
-            $this->ymlWriter->write($yamlPath, ['services' => $dependencies]);
+            $yamlPath = sprintf('%s/Resources/config/services.yml', $bundleDir);
+            $this->yamlWriter->write($yamlPath, $yaml);
         }
     }
 

@@ -52,18 +52,13 @@ Minimizing conflict issues occured by single-file  based services.yml dependency
             bundles: ["ApiBundle"]
             
 
-- Import services_di.yml to your main services.yml
-
-    `````
-    imports:
-        - { resource: services_di.yml }
+- Change `services.yml` to `services.dist.yml`
         
-        
-- Add `services_di.yml` to .gitignore
+- Add `services.yml` to .gitignore
 
      
 ### Usage
-services_di.yml will be auto-generated after each each execution `composer install` command
+services.yml will be auto-generated after each each execution `composer install` command
 
 Usage of `@DI` annotation
 ````$xslt

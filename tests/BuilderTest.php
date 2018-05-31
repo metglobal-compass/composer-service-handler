@@ -6,6 +6,7 @@ use SymfonyAutoDiYml\Annotation\DI;
 use SymfonyAutoDiYml\Builder;
 use SymfonyAutoDiYml\Finder\ConfigFinder;
 use SymfonyAutoDiYml\Finder\DependencyFinder;
+use SymfonyAutoDiYml\Finder\YamlParser;
 use SymfonyAutoDiYml\Writer\YamlWriter;
 
 class BuilderTest extends BaseTestCase
@@ -19,7 +20,15 @@ class BuilderTest extends BaseTestCase
                     'test_bundle1.di2' => $this->getSampleDI("test_bundle1.di2", 'TestBundle1\Di2'),
                 ],
                 'dir' => 'src/TestBundle1',
-                'yamlPath' => 'src/TestBundle1/Resources/config/services_di.yml',
+                'yamlPath' => 'src/TestBundle1/Resources/config/services.yml',
+                'distPath' => 'src/TestBundle1/Resources/config/services.dist.yml',
+                'distYaml' => [
+                    'services' => [
+                        'test_bundle_dist1.di1' => [
+                            'class' => 'TestBundle1\Dist1'
+                        ]
+                    ]
+                ],
                 'yaml' => [
                     'test_bundle1.di1' => [
                         'class' => 'TestBundle1\Di1'
@@ -35,7 +44,15 @@ class BuilderTest extends BaseTestCase
                     'test_bundle2.di2' => $this->getSampleDI("test_bundle2.di2", 'TestBundle2\Di2'),
                 ],
                 'dir' => 'src/TestBundle2',
-                'yamlPath' => 'src/TestBundle2/Resources/config/services_di.yml',
+                'yamlPath' => 'src/TestBundle2/Resources/config/services.yml',
+                'distPath' => 'src/TestBundle2/Resources/config/services.dist.yml',
+                'distYaml' => [
+                    'services' => [
+                        'test_bundle_dist2.di1' => [
+                            'class' => 'TestBundle2\Dist2'
+                        ]
+                    ]
+                ],
                 'yaml' => [
                     'test_bundle2.di1' => [
                         'class' => 'TestBundle2\Di1',
@@ -50,8 +67,9 @@ class BuilderTest extends BaseTestCase
         $configFinderMock = $this->getConfigFinderMock(array_keys($bundles));
         $dependencyFinderMock = $this->getDependencyFinderMock($bundles);
         $yamlWriterMock = $this->getYamlWriterMock($bundles);
+        $yamlParserMock = $this->getYamlParserMock($bundles);
 
-        $builder = new Builder($configFinderMock, $dependencyFinderMock, $yamlWriterMock);
+        $builder = new Builder($configFinderMock, $dependencyFinderMock, $yamlWriterMock, $yamlParserMock);
         $builder->build();
     }
 
@@ -112,10 +130,11 @@ class BuilderTest extends BaseTestCase
 
         $i = 0;
         foreach ($bundles as $bundle) {
+            $bundle['distYaml']['services'] = array_merge($bundle['distYaml']['services'], $bundle['yaml']);
             $yamlWriterMock
                 ->expects($this->at($i))
                 ->method('write')
-                ->with($bundle['yamlPath'], ['services' => $bundle['yaml']]);
+                ->with($bundle['yamlPath'], $bundle['distYaml']);
 
             $i++;
         }
@@ -135,5 +154,30 @@ class BuilderTest extends BaseTestCase
         $di->class = $class;
 
         return $di;
+    }
+
+    /**
+     * @param $bundles
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected function getYamlParserMock($bundles)
+    {
+        $yamlParserMock = $this
+            ->getMockBuilder(YamlParser::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $i = 0;
+        foreach ($bundles as $bundle) {
+            $yamlParserMock
+                ->expects($this->at($i))
+                ->method('parse')
+                ->with($bundle['distPath'])
+                ->willReturn($bundle['distYaml']);
+
+            $i++;
+        }
+
+        return $yamlParserMock;
     }
 }
