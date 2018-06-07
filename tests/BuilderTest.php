@@ -21,7 +21,7 @@ class BuilderTest extends BaseTestCase
                 ],
                 'dir' => 'src/TestBundle1',
                 'yamlPath' => 'src/TestBundle1/Resources/config/services.yml',
-                'distPath' => 'src/TestBundle1/Resources/config/services.dist.yml',
+                'distPath' => 'src/TestBundle1/Resources/config/services.yml.dist',
                 'distYaml' => [
                     'services' => [
                         'test_bundle_dist1.di1' => [
@@ -45,7 +45,7 @@ class BuilderTest extends BaseTestCase
                 ],
                 'dir' => 'src/TestBundle2',
                 'yamlPath' => 'src/TestBundle2/Resources/config/services.yml',
-                'distPath' => 'src/TestBundle2/Resources/config/services.dist.yml',
+                'distPath' => 'src/TestBundle2/Resources/config/services.yml.dist',
                 'distYaml' => [
                     'services' => [
                         'test_bundle_dist2.di1' => [

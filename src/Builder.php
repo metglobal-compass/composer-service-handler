@@ -69,7 +69,7 @@ class Builder
             }, $dependencies);
 
             // Read yaml dist
-            $distPath = sprintf('%s/Resources/config/services.dist.yml', $bundleDir);
+            $distPath = sprintf('%s/Resources/config/services.yml.dist', $bundleDir);
             $yaml = $this->yamlParser->parse($distPath);
             $yaml = $yaml ? $yaml : ['services' => []];
 
