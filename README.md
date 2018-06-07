@@ -52,7 +52,7 @@ Minimizing conflict issues occured by single-file  based services.yml dependency
             bundles: ["ApiBundle"]
             
 
-- Change `services.yml` to `services.dist.yml`
+- Change `services.yml` to `services.yml.dist`
         
 - Add `services.yml` to .gitignore
 
