@@ -67,6 +67,7 @@ class AnnotationFinderTest extends BaseTestCase
         $this->assertEquals([['setField', ['value']], ['setAnotherField', ['anotherValue']]], $annotation->calls);
         $this->assertEquals(false, $annotation->public);
         $this->assertEquals(true, $annotation->abstract);
+        $this->assertEquals(true, $annotation->lazy);
         $this->assertEquals("sample_bundle.parent_of_complex_class", $annotation->parent);
 
         $tag = new Tag();

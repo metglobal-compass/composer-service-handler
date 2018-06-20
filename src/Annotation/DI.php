@@ -59,6 +59,11 @@ final class DI implements YamlConvertable
     /**
      * @var bool
      */
+    public $lazy;
+
+    /**
+     * @var bool
+     */
     public $autowire;
 
     /**
@@ -75,7 +80,7 @@ final class DI implements YamlConvertable
             'class' => $this->class,
         ];
 
-        $optionalFields = ['arguments', 'factory', 'calls', 'public', 'abstract', 'parent', 'autowire', 'autoconfigure'];
+        $optionalFields = ['arguments', 'factory', 'calls', 'public', 'abstract', 'parent', 'lazy', 'autowire', 'autoconfigure'];
 
         foreach ($optionalFields as $field) {
             if ($this->$field !== null) {

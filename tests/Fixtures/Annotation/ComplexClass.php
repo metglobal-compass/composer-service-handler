@@ -16,6 +16,7 @@ use SymfonyAutoDiYml\Annotation\Tag;
  *     },
  *     public=false,
  *     abstract=true,
+ *     lazy=true,
  *     parent="sample_bundle.parent_of_complex_class",
  *     tags={
  *      @Tag(name="tag_name", event="eventName", method="eventMethod", priority=15)
