@@ -23,6 +23,7 @@ class DITest extends BaseTestCase
         $di->public = true;
         $di->abstract = false;
         $di->parent = '@test_parent_dependency';
+        $di->lazy = true;
         $di->autoconfigure = false;
         $di->autowire = true;
 
@@ -41,6 +42,7 @@ class DITest extends BaseTestCase
             'public' => true,
             'abstract' => false,
             'parent' => '@test_parent_dependency',
+            'lazy' => true,
             'autoconfigure' => false,
             'autowire' => true,
 
