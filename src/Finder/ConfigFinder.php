@@ -1,6 +1,6 @@
 <?php
 
-namespace SymfonyAutoDiYml\Finder;
+namespace Metglobal\ServiceHandler\Finder;
 
 class ConfigFinder
 {

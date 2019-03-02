@@ -1,9 +1,9 @@
 <?php
 
-namespace SymfonyAutoDiYml\Tests\Fixtures\Annotation;
+namespace Metglobal\ServiceHandler\Tests\Fixtures\Annotation;
 
-use SymfonyAutoDiYml\Annotation\DI;
-use SymfonyAutoDiYml\Annotation\Tag;
+use Metglobal\ServiceHandler\Annotation\DI;
+use Metglobal\ServiceHandler\Annotation\Tag;
 
 /**
  * @DI(
@@ -24,7 +24,7 @@ use SymfonyAutoDiYml\Annotation\Tag;
  *     autoconfigure=false,
  *     autowire=true
  * )
- * @package SymfonyAutoDiYml\Tests\Annotation
+ * @package Metglobal\ServiceHandler\Tests\Annotation
  */
 class ComplexClass
 {

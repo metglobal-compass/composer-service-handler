@@ -1,8 +1,8 @@
 <?php
 
-namespace SymfonyAutoDiYml\Finder;
+namespace Metglobal\ServiceHandler\Finder;
 
-use SymfonyAutoDiYml\Annotation\DI;
+use Metglobal\ServiceHandler\Annotation\DI;
 
 class DependencyFinder
 {

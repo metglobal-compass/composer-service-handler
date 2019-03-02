@@ -1,11 +1,11 @@
 <?php
 
-namespace SymfonyAutoDiYml\Tests\Finder;
+namespace Metglobal\ServiceHandler\Tests\Finder;
 
-use SymfonyAutoDiYml\Finder\ComposerParser;
-use SymfonyAutoDiYml\Finder\ConfigFinder;
-use SymfonyAutoDiYml\Finder\YamlParser;
-use SymfonyAutoDiYml\Tests\BaseTestCase;
+use Metglobal\ServiceHandler\Finder\ComposerParser;
+use Metglobal\ServiceHandler\Finder\ConfigFinder;
+use Metglobal\ServiceHandler\Finder\YamlParser;
+use Metglobal\ServiceHandler\Tests\BaseTestCase;
 
 class ConfigFinderTest extends BaseTestCase
 {

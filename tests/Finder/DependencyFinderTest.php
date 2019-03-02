@@ -1,12 +1,12 @@
 <?php
 
-namespace SymfonyAutoDiYml\Tests\Finder;
+namespace Metglobal\ServiceHandler\Tests\Finder;
 
-use SymfonyAutoDiYml\Annotation\DI;
-use SymfonyAutoDiYml\Finder\AnnotationFinder;
-use SymfonyAutoDiYml\Finder\DependencyFinder;
-use SymfonyAutoDiYml\Finder\PhpClassFinder;
-use SymfonyAutoDiYml\Tests\BaseTestCase;
+use Metglobal\ServiceHandler\Annotation\DI;
+use Metglobal\ServiceHandler\Finder\AnnotationFinder;
+use Metglobal\ServiceHandler\Finder\DependencyFinder;
+use Metglobal\ServiceHandler\Finder\PhpClassFinder;
+use Metglobal\ServiceHandler\Tests\BaseTestCase;
 
 class DependencyFinderTest extends BaseTestCase
 {

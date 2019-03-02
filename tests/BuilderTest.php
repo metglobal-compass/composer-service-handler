@@ -1,13 +1,13 @@
 <?php
 
-namespace SymfonyAutoDiYml\Tests;
+namespace Metglobal\ServiceHandler\Tests;
 
-use SymfonyAutoDiYml\Annotation\DI;
-use SymfonyAutoDiYml\Builder;
-use SymfonyAutoDiYml\Finder\ConfigFinder;
-use SymfonyAutoDiYml\Finder\DependencyFinder;
-use SymfonyAutoDiYml\Finder\YamlParser;
-use SymfonyAutoDiYml\Writer\YamlWriter;
+use Metglobal\ServiceHandler\Annotation\DI;
+use Metglobal\ServiceHandler\ScriptHandler;
+use Metglobal\ServiceHandler\Finder\ConfigFinder;
+use Metglobal\ServiceHandler\Finder\DependencyFinder;
+use Metglobal\ServiceHandler\Finder\YamlParser;
+use Metglobal\ServiceHandler\Writer\YamlWriter;
 
 class BuilderTest extends BaseTestCase
 {
@@ -70,7 +70,7 @@ class BuilderTest extends BaseTestCase
         $yamlWriterMock = $this->getYamlWriterMock($bundles);
         $yamlParserMock = $this->getYamlParserMock($bundles);
 
-        $builder = new Builder($configFinderMock, $dependencyFinderMock, $yamlWriterMock, $yamlParserMock);
+        $builder = new ScriptHandler($configFinderMock, $dependencyFinderMock, $yamlWriterMock, $yamlParserMock);
         $builder->build();
     }
 

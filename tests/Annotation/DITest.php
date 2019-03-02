@@ -1,10 +1,10 @@
 <?php
 
-namespace SymfonyAutoDiYml\Tests\Annotation;
+namespace Metglobal\ServiceHandler\Tests\Annotation;
 
-use SymfonyAutoDiYml\Annotation\DI;
-use SymfonyAutoDiYml\Annotation\Tag;
-use SymfonyAutoDiYml\Tests\BaseTestCase;
+use Metglobal\ServiceHandler\Annotation\DI;
+use Metglobal\ServiceHandler\Annotation\Tag;
+use Metglobal\ServiceHandler\Tests\BaseTestCase;
 
 class DITest extends BaseTestCase
 {

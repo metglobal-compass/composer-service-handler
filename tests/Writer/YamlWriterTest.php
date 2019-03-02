@@ -1,10 +1,10 @@
 <?php
 
-namespace SymfonyAutoDiYml\Tests\Writer;
+namespace Metglobal\ServiceHandler\Tests\Writer;
 
 use Symfony\Component\Yaml\Yaml;
-use SymfonyAutoDiYml\Tests\BaseTestCase;
-use SymfonyAutoDiYml\Writer\YamlWriter;
+use Metglobal\ServiceHandler\Tests\BaseTestCase;
+use Metglobal\ServiceHandler\Writer\YamlWriter;
 
 class YamlWriterTest extends BaseTestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace SymfonyAutoDiYml\Annotation;
+namespace Metglobal\ServiceHandler\Annotation;
 
 interface YamlConvertable
 {

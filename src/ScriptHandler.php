@@ -1,20 +1,20 @@
 <?php
 
-namespace SymfonyAutoDiYml;
+namespace Metglobal\ServiceHandler;
 
 use Composer\Script\Event;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Symfony\Component\Finder\Finder;
-use SymfonyAutoDiYml\Annotation\DI;
-use SymfonyAutoDiYml\Finder\AnnotationFinder;
-use SymfonyAutoDiYml\Finder\ComposerParser;
-use SymfonyAutoDiYml\Finder\ConfigFinder;
-use SymfonyAutoDiYml\Finder\DependencyFinder;
-use SymfonyAutoDiYml\Finder\PhpClassFinder;
-use SymfonyAutoDiYml\Finder\YamlParser;
-use SymfonyAutoDiYml\Writer\YamlWriter;
+use Metglobal\ServiceHandler\Annotation\DI;
+use Metglobal\ServiceHandler\Finder\AnnotationFinder;
+use Metglobal\ServiceHandler\Finder\ComposerParser;
+use Metglobal\ServiceHandler\Finder\ConfigFinder;
+use Metglobal\ServiceHandler\Finder\DependencyFinder;
+use Metglobal\ServiceHandler\Finder\PhpClassFinder;
+use Metglobal\ServiceHandler\Finder\YamlParser;
+use Metglobal\ServiceHandler\Writer\YamlWriter;
 
-class Builder
+class ScriptHandler
 {
     /**
      * @var ConfigFinder
@@ -37,7 +37,7 @@ class Builder
     private $yamlParser;
 
     /**
-     * Builder constructor.
+     * ScriptHandler constructor.
      * @param ConfigFinder $configFinder
      * @param DependencyFinder $dependencyFinder
      * @param YamlWriter $yamlWriter
@@ -88,7 +88,7 @@ class Builder
      * @throws \Doctrine\Common\Annotations\AnnotationException
      * @throws \ReflectionException
      */
-    public static function buildServicesYml(Event $event)
+    public static function buildServices(Event $event)
     {
         $configFinder = new ConfigFinder(new ComposerParser($event), new YamlParser());
         $phpClassFinder = new PhpClassFinder(new Finder());
@@ -96,7 +96,7 @@ class Builder
         $dependencyFinder = new DependencyFinder($phpClassFinder, $annotationFinder);
         $yamlWriter = new YamlWriter();
 
-        $builder = new Builder($configFinder, $dependencyFinder, $yamlWriter, new YamlParser());
-        $builder->build();
+        $ScriptHandler = new ScriptHandler($configFinder, $dependencyFinder, $yamlWriter, new YamlParser());
+        $ScriptHandler->build();
     }
 }

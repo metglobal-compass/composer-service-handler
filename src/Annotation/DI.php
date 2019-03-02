@@ -1,6 +1,6 @@
 <?php
 
-namespace SymfonyAutoDiYml\Annotation;
+namespace Metglobal\ServiceHandler\Annotation;
 
 use Doctrine\Common\Annotations\Annotation;
 
@@ -32,7 +32,7 @@ final class DI implements YamlConvertable
     public $factory;
 
     /**
-     * @var array<SymfonyAutoDiYml\Annotation\Tag>
+     * @var array<Metglobal\ServiceHandler\Annotation\Tag>
      */
     public $tags;
 
