@@ -89,7 +89,7 @@ class BuilderTest extends BaseTestCase
         $configFinderMock
             ->expects($this->exactly(1))
             ->method("getConfigYml")
-            ->willReturn(['parameters' => ['symfony-yml-builder' => ['bundles' => $bundles, 'exclude' => $exclude]]]);
+            ->willReturn(['parameters' => ['service_handler' => ['bundles' => $bundles, 'exclude' => $exclude]]]);
 
         return $configFinderMock;
     }

@@ -53,6 +53,45 @@ class DependencyFinderTest extends BaseTestCase
     }
 
     /**
+     * Some of class has annotations
+     *
+     * @throws \ReflectionException
+     * @group exclude
+     */
+    public function testExclude()
+    {
+        /*
+            metglobal:
+                service_handler:
+                    bundles:
+                        - 'Gts/ApiBundle'
+                    exclude: { 'Gts/ApiBundle': ['Tests'] }
+         */
+        $phpClassFinderMock = $this->getPhpClassFinderMock(
+            'testDir',
+            [
+                'TestClass', 'Test2Class/Exclude/Me', 'Test2Class/Exclude/Us', 'Test3Class/Exclude/Me', 'Test4Class/Exclude/Me'
+            ]
+        );
+        $annotationFinderMock = $this->getAnnotationFinderMock(
+            [
+                'TestClass' => $this->getSampleDI('di1')
+            ]
+        );
+
+        $exclude = [
+            'Test2Class/Exclude' => ['Me', 'Us'],
+            'Test3Class/Exclude' => ['Me'],
+            'Test4Class/Exclude' => 'Me',
+        ];
+
+        $dependencyFinder = new DependencyFinder($phpClassFinderMock, $annotationFinderMock);
+        $annotations = $dependencyFinder->find('testDir', $exclude);
+
+        $this->assertEquals(1, count($annotations));
+    }
+
+    /**
      * @param $dir
      * @param $returningClasses
      * @return \PHPUnit_Framework_MockObject_MockObject

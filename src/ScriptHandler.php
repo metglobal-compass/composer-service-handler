@@ -58,8 +58,8 @@ class ScriptHandler
     {
         $configYml = $this->configFinder->getConfigYml();
 
-        $bundles = $configYml['parameters']['symfony-yml-builder']['bundles'];
-        $exclude = $configYml['parameters']['symfony-yml-builder']['exclude'] ?? null;
+        $bundles = $configYml['parameters']['service_handler']['bundles'];
+        $exclude = $configYml['parameters']['service_handler']['exclude'];
 
         foreach ($bundles as $bundle) {
             // Find dependencies and cast to array for yaml convertion

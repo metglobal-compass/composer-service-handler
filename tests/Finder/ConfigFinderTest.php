@@ -15,8 +15,9 @@ class ConfigFinderTest extends BaseTestCase
 
         $parsedYaml = [
             "parameters" => [
-                "symfony-yml-builder" => [
-                    "bundles" => ["Gts/ApiBundle"]
+                "service_handler" => [
+                    "bundles" => ["Gts/ApiBundle"],
+                    "exclude" => []
                 ]
             ]
         ];
@@ -44,8 +45,8 @@ class ConfigFinderTest extends BaseTestCase
         $this->assertEquals(
             [
                 'parameters' => [
-                    'symfony-yml-builder' => [
-                        'bundles' => [],
+                    'service_handler' => [
+                        "exclude" => []
                     ]
                 ]
             ],
@@ -62,7 +63,7 @@ class ConfigFinderTest extends BaseTestCase
     {
         $parsedYaml = [
             'parameters' => [
-                'symfony-yml-builder' => [
+                'service_handler' => [
                     'bundles' => "wrongval",
                 ]
             ]

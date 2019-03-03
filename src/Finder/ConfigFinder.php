@@ -35,19 +35,36 @@ class ConfigFinder
         $yaml = $this->yamlParser->parse(sprintf("%s/config/config.yml", $symfonyAppDir));
 
         // Return empty array if parameter does not exists
-        if (!isset($yaml['parameters']['symfony-yml-builder']['bundles'])) {
+        if (!isset($yaml['parameters']['service_handler']['bundles'])) {
             $yaml = [
                 'parameters' => [
-                    'symfony-yml-builder' => [
+                    'service_handler' => [
                         'bundles' => [],
                     ]
                 ]
             ];
         }
 
-        if (!is_array($yaml['parameters']['symfony-yml-builder']['bundles'])) {
+        if (!is_array($yaml['parameters']['service_handler']['bundles'])) {
             throw new \InvalidArgumentException(
-                'symfony-yml-builder.bundles parameter must be array of string which has bundle names'
+                'parameters.service_handler.bundles config must be array of string which has bundle names'
+            );
+        }
+
+        // Return empty array if parameter does not exists
+        if (!isset($yaml['parameters']['service_handler']['exclude'])) {
+            $yaml = [
+                'parameters' => [
+                    'service_handler' => [
+                        'exclude' => [],
+                    ]
+                ]
+            ];
+        }
+
+        if (!is_array($yaml['parameters']['service_handler']['exclude'])) {
+            throw new \InvalidArgumentException(
+                'parameters.service_handler.exclude config must be array of excluded bundle folders'
             );
         }
 
