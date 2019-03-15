@@ -3,9 +3,9 @@
 namespace Metglobal\ServiceHandler\Tests\Finder;
 
 use Metglobal\ServiceHandler\Finder\YamlParser;
-use Metglobal\ServiceHandler\Tests\BaseTestCase;
+use PHPUnit\Framework\TestCase;
 
-class YamlParserTest extends BaseTestCase
+class YamlParserTest extends TestCase
 {
     public function testSuccess()
     {

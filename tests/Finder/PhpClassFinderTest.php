@@ -2,12 +2,12 @@
 
 namespace Metglobal\ServiceHandler\Tests\Finder;
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Metglobal\ServiceHandler\Finder\PhpClassFinder;
-use Metglobal\ServiceHandler\Tests\BaseTestCase;
 
-class PhpClassFinderTest extends BaseTestCase
+class PhpClassFinderTest extends TestCase
 {
     public function testSuccess()
     {

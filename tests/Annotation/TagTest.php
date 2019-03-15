@@ -3,9 +3,9 @@
 namespace Metglobal\ServiceHandler\Tests\Annotation;
 
 use Metglobal\ServiceHandler\Annotation\Tag;
-use Metglobal\ServiceHandler\Tests\BaseTestCase;
+use PHPUnit\Framework\TestCase;
 
-class TagTest extends BaseTestCase
+class TagTest extends TestCase
 {
     public function testSuccess()
     {

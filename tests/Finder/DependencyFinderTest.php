@@ -6,9 +6,9 @@ use Metglobal\ServiceHandler\Annotation\DI;
 use Metglobal\ServiceHandler\Finder\AnnotationFinder;
 use Metglobal\ServiceHandler\Finder\DependencyFinder;
 use Metglobal\ServiceHandler\Finder\PhpClassFinder;
-use Metglobal\ServiceHandler\Tests\BaseTestCase;
+use PHPUnit\Framework\TestCase;
 
-class DependencyFinderTest extends BaseTestCase
+class DependencyFinderTest extends TestCase
 {
     /**
      * All of classes has annotations

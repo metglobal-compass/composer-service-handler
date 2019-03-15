@@ -2,11 +2,11 @@
 
 namespace Metglobal\ServiceHandler\Tests\Writer;
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Yaml\Yaml;
-use Metglobal\ServiceHandler\Tests\BaseTestCase;
 use Metglobal\ServiceHandler\Writer\YamlWriter;
 
-class YamlWriterTest extends BaseTestCase
+class YamlWriterTest extends TestCase
 {
     public function testSuccess()
     {

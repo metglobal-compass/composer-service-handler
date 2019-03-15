@@ -6,9 +6,9 @@ use Composer\Composer;
 use Composer\Package\RootPackage;
 use Composer\Script\Event;
 use Metglobal\ServiceHandler\Finder\ComposerParser;
-use Metglobal\ServiceHandler\Tests\BaseTestCase;
+use PHPUnit\Framework\TestCase;
 
-class ComposerParserTest extends BaseTestCase
+class ComposerParserTest extends TestCase
 {
     /**
      * Success test

@@ -4,9 +4,9 @@ namespace Metglobal\ServiceHandler\Tests\Annotation;
 
 use Metglobal\ServiceHandler\Annotation\DI;
 use Metglobal\ServiceHandler\Annotation\Tag;
-use Metglobal\ServiceHandler\Tests\BaseTestCase;
+use PHPUnit\Framework\TestCase;
 
-class DITest extends BaseTestCase
+class DITest extends TestCase
 {
     public function testYamlConvertion()
     {

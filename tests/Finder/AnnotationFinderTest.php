@@ -10,14 +10,14 @@ use Metglobal\ServiceHandler\Tests\Fixtures\Annotation\ComplexClass;
 use Metglobal\ServiceHandler\Tests\Fixtures\Annotation\ConfigClass;
 use Metglobal\ServiceHandler\Tests\Fixtures\Annotation\SimpleClass;
 use Metglobal\ServiceHandler\Tests\Fixtures\Annotation\WrongClass;
-use Metglobal\ServiceHandler\Tests\BaseTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Depends fixtures class under Metglobal\ServiceHandler\Tests\Annotation namespace
  *
  * @package Metglobal\ServiceHandler\Tests\Finder
  */
-class AnnotationFinderTest extends BaseTestCase
+class AnnotationFinderTest extends TestCase
 {
     /**
      * @throws \Doctrine\Common\Annotations\AnnotationException

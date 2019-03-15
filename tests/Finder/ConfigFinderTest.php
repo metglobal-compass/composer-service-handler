@@ -5,9 +5,9 @@ namespace Metglobal\ServiceHandler\Tests\Finder;
 use Metglobal\ServiceHandler\Finder\ComposerParser;
 use Metglobal\ServiceHandler\Finder\ConfigFinder;
 use Metglobal\ServiceHandler\Finder\YamlParser;
-use Metglobal\ServiceHandler\Tests\BaseTestCase;
+use PHPUnit\Framework\TestCase;
 
-class ConfigFinderTest extends BaseTestCase
+class ConfigFinderTest extends TestCase
 {
     public function testSuccessfulParsing()
     {
