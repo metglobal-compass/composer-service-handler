@@ -1,6 +1,6 @@
 {
-  "name": "metglobal/symfony-autodi-yaml",
-  "description": "A composer script generates services.yml from class annotations.",
+  "name": "metglobal/composer-service-handler",
+  "description": "Composer script handling for generating service definitions from class annotation",
   "type": "library",
   "keywords": [
     "annotations",
