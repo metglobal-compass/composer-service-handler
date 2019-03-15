@@ -59,11 +59,12 @@ class Builder
         $configYml = $this->configFinder->getConfigYml();
 
         $bundles = $configYml['parameters']['symfony-yml-builder']['bundles'];
+        $exclude = $configYml['parameters']['symfony-yml-builder']['exclude'] ?? null;
 
         foreach ($bundles as $bundle) {
             // Find dependencies and cast to array for yaml convertion
             $bundleDir = sprintf("src/%s", $bundle);
-            $dependencies = $this->dependencyFinder->find($bundleDir);
+            $dependencies = $this->dependencyFinder->find($bundleDir, $exclude);
             $dependencies = array_map(function (DI $dependency) {
                 return $dependency->toYamlArray();
             }, $dependencies);

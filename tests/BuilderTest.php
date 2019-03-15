@@ -63,8 +63,9 @@ class BuilderTest extends BaseTestCase
                 ]
             ]
         ];
+        $exclude = 'TestBundle1/Tests';
 
-        $configFinderMock = $this->getConfigFinderMock(array_keys($bundles));
+        $configFinderMock = $this->getConfigFinderMock(array_keys($bundles), $exclude);
         $dependencyFinderMock = $this->getDependencyFinderMock($bundles);
         $yamlWriterMock = $this->getYamlWriterMock($bundles);
         $yamlParserMock = $this->getYamlParserMock($bundles);
@@ -75,9 +76,10 @@ class BuilderTest extends BaseTestCase
 
     /**
      * @param $bundles
+     * @param $exclude
      * @return \PHPUnit_Framework_MockObject_MockObject
      */
-    protected function getConfigFinderMock($bundles)
+    protected function getConfigFinderMock($bundles, $exclude)
     {
         $configFinderMock = $this
             ->getMockBuilder(ConfigFinder::class)
@@ -87,7 +89,7 @@ class BuilderTest extends BaseTestCase
         $configFinderMock
             ->expects($this->exactly(1))
             ->method("getConfigYml")
-            ->willReturn(['parameters' => ['symfony-yml-builder' => ['bundles' => $bundles]]]);
+            ->willReturn(['parameters' => ['symfony-yml-builder' => ['bundles' => $bundles, 'exclude' => $exclude]]]);
 
         return $configFinderMock;
     }
