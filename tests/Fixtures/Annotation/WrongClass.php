@@ -1,11 +1,11 @@
 <?php
 
-namespace Metglobal\ServiceHandler\Tests\Fixtures\Annotation;
+namespace Tests\Fixtures\Annotation;
 
-use Metglobal\ServiceHandler\Annotation\DI;
+use Metglobal\ServiceHandler\Annotation\Service;
 
 /**
- * @DI(id=1)
+ * @Service(id=1)
  * @package Metglobal\ServiceHandler\Tests\Annotation
  */
 class WrongClass

@@ -1,6 +1,6 @@
 <?php
 
-namespace Metglobal\ServiceHandler\Tests\Annotation;
+namespace Tests\Annotation;
 
 use Metglobal\ServiceHandler\Annotation\Tag;
 use PHPUnit\Framework\TestCase;

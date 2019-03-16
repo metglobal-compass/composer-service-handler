@@ -1,6 +1,6 @@
 <?php
 
-namespace Metglobal\ServiceHandler\Tests;
+namespace Tests;
 
 use Metglobal\ServiceHandler\Processor;
 use PHPUnit\Framework\TestCase;
@@ -41,33 +41,36 @@ class ProcessorTest extends TestCase
     {
         return [
             'no config' => [
-                [
-                    'parameters' => [],
-                ],
-                'The parameters.service_handler setting is required to use this script handler.',
+                [],
+                'The extra.metglobal-services.file setting is required to use this script handler.',
             ],
-            'no bundles config' => [
-                [
-                    'parameters' => [
-                        'service_handler' => [
-                            'bundles' => [],
-                            'exclude' => [],
-                        ],
-                    ],
-                ],
-                'The parameters.service_handler.bundles setting is required to use this script handler.',
-            ],
-            'no exclude config' => [
-                [
-                    'parameters' => [
-                        'service_handler' => [
-                            'bundles' => ['TestBundle'],
-                            'exclude' => [],
-                        ],
-                    ],
-                ],
-                'The parameters.service_handler.exclude setting is required to use this script handler.',
-            ],
+//            'no config parameters' => [
+//                [
+//                    'parameters' => [],
+//                ],
+//                'The parameters.service_handler setting is required to use this script handler.',
+//            ],
+//            'no valid config parameters' => [
+//                [
+//                    'parameters' => [
+//                        'service_handler' => [
+//                            'TestBundle\\' => [],
+//                        ],
+//                    ],
+//                ],
+//                'The parameters.service_handler.bundles setting is required to use this script handler.',
+//            ],
+//            'no exclude config parameters' => [
+//                [
+//                    'parameters' => [
+//                        'service_handler' => [
+//                            'TestBundle\\' => [],
+//                            'exclude' => [],
+//                        ],
+//                    ],
+//                ],
+//                'The parameters.service_handler.exclude setting is required to use this script handler.',
+//            ],
         ];
     }
 }

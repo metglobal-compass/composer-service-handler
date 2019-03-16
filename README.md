@@ -4,19 +4,19 @@
 Minimizing conflict issues occured by single-file  based services.yml dependency injections
 ### Installation
 
-- Add repository to composer.json
+1. Add repository to composer.json
 
         {
             "type": "vcs",
-            "url": "https://github.com/metglobal-compass/symfony-autodi-yaml.git"
+            "url": "https://github.com/metglobal-compass/composer-service-handler.git"
         }
         
-- Install with composer
+2. Install with composer
 
-   ```composer require metglobal/symfony-autodi-yaml:dev-master``` 
+   ```composer require metglobal/composer-service-handler:dev-master```
     
 
-- Add ```Metglobal\\ServiceHandler\\ScriptHandler::buildServices``` command to 2nd position of "symfony-scripts" list in composer.json. It should look like following:
+3. Add ```Metglobal\\ServiceHandler\\ScriptHandler::buildServices``` command to 2nd position of "symfony-scripts" list in composer.json. It should look like following:
     
         "scripts": {
             "symfony-scripts": [
@@ -38,34 +38,32 @@ Minimizing conflict issues occured by single-file  based services.yml dependency
         }
         
         
-- Define which bundles will have automatic generated services.yml
+4. Define which bundles will have automatic generated services.yml in app folder
 
-    `config.yml`
+    `service.yml`
     `````
     parameters:
         locale: en
         service_handler:
-            bundles: ['ApiBundle']
-            exclude:
-                ApiBundle: ['Tests']
-            
+            AcmeBundle\:
+                resource: '../../src/AcmeBundle/*'
+                exclude: '../../src/AcmeBundle/{Controller,Entity,Exclude,Repository,Tests,AcmeBundle.php}'
 
-- Change `services.yml` to `services.yml.dist`
-        
-- Add `services.yml` to .gitignore
+
+5. Add `services.yml` to .gitignore
 
      
 ### Usage
 services.yml will be auto-generated after each each execution `composer install` command
 
-Usage of `@DI` annotation
+Usage of `@Service` annotation
 ````$xslt
 namespace ApiBundle\Repository;
 
-use SymfonyAutoDiYml\Annotation\DI;
+use SymfonyAutoDiYml\Annotation\Service;
 
 /**
- * @DI(
+ * @Service(
  *     id="api.repository.my_repository",
  *     factory= {"@doctrine.orm.default_entity_manager", "getRepository"},
  *     arguments={"ApiBundle:MyEntity"}
@@ -76,4 +74,4 @@ class MyRepository {
 }
 ````
 
-`@DI` annotation does not have any different usage than a services.yml based definition.        
+`@Service` annotation does not have any different usage than a services.yml based definition.

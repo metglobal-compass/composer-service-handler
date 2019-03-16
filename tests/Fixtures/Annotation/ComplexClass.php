@@ -1,12 +1,12 @@
 <?php
 
-namespace Metglobal\ServiceHandler\Tests\Fixtures\Annotation;
+namespace Tests\Fixtures\Annotation;
 
-use Metglobal\ServiceHandler\Annotation\DI;
+use Metglobal\ServiceHandler\Annotation\Service;
 use Metglobal\ServiceHandler\Annotation\Tag;
 
 /**
- * @DI(
+ * @Service(
  *     id="sample_bundle.complex_class",
  *     arguments={"@sample_bundle.simple_class"},
  *     factory={"@sample_bundle.complex_class_factory", "create"},

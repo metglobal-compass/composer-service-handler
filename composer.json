@@ -24,12 +24,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Metglobal\\ServiceHandler\\": "src/"
+      "Metglobal\\ServiceHandler\\": ""
     }
   },
-  "autoload-dev": {
+  "autoload-dev":  {
     "psr-4": {
-      "Metglobal\\ServiceHandler\\Tests\\": "tests/"
+      "Tests\\": "tests/"
     }
   },
   "license": "MIT",
