@@ -1,6 +1,6 @@
 <?php
 
-namespace SymfonyAutoDiYml;
+namespace Metglobal\ServiceHandler;
 
 class Reflector
 {

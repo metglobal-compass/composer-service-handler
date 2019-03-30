@@ -1,14 +1,14 @@
 <?php
 
-namespace SymfonyAutoDiYml\Tests\Finder;
+namespace Metglobal\ServiceHandler\Tests\Finder;
 
 use Composer\Composer;
 use Composer\Package\RootPackage;
 use Composer\Script\Event;
-use SymfonyAutoDiYml\Finder\ComposerParser;
-use SymfonyAutoDiYml\Tests\BaseTestCase;
+use Metglobal\ServiceHandler\Finder\ComposerParser;
+use PHPUnit\Framework\TestCase;
 
-class ComposerParserTest extends BaseTestCase
+class ComposerParserTest extends TestCase
 {
     /**
      * Success test

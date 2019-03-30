@@ -1,11 +1,11 @@
 <?php
 
-namespace SymfonyAutoDiYml\Tests\Finder;
+namespace Metglobal\ServiceHandler\Tests\Finder;
 
-use SymfonyAutoDiYml\Finder\YamlParser;
-use SymfonyAutoDiYml\Tests\BaseTestCase;
+use Metglobal\ServiceHandler\Finder\YamlParser;
+use PHPUnit\Framework\TestCase;
 
-class YamlParserTest extends BaseTestCase
+class YamlParserTest extends TestCase
 {
     public function testSuccess()
     {

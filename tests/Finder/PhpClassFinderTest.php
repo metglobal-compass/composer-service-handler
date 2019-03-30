@@ -1,13 +1,13 @@
 <?php
 
-namespace SymfonyAutoDiYml\Tests\Finder;
+namespace Metglobal\ServiceHandler\Tests\Finder;
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
-use SymfonyAutoDiYml\Finder\PhpClassFinder;
-use SymfonyAutoDiYml\Tests\BaseTestCase;
+use Metglobal\ServiceHandler\Finder\PhpClassFinder;
 
-class PhpClassFinderTest extends BaseTestCase
+class PhpClassFinderTest extends TestCase
 {
     public function testSuccess()
     {

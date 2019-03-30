@@ -1,8 +1,8 @@
 <?php
 
-namespace SymfonyAutoDiYml\Finder;
+namespace Metglobal\ServiceHandler\Finder;
 
-use SymfonyAutoDiYml\Annotation\DI;
+use Metglobal\ServiceHandler\Annotation\DI;
 
 class DependencyFinder
 {
@@ -29,11 +29,11 @@ class DependencyFinder
 
     /**
      * @param string $dir
-     * @param mixed $exclude
+     * @param array $exclude
      * @return DI[]
      * @throws \ReflectionException
      */
-    public function find(string $dir, $exclude = null)
+    public function find(string $dir, $exclude = [])
     {
         $annotations = [];
 
@@ -42,7 +42,7 @@ class DependencyFinder
         $excludedFolders = $this->parseExclude($exclude);
 
         foreach ($classes as $class) {
-            if ($this->startsWith($class, $excludedFolders)) {
+            if ($excludedFolders && $this->startsWith($class, $excludedFolders)) {
                 continue;
             }
             
@@ -68,6 +68,24 @@ class DependencyFinder
 
     private function parseExclude($exclude)
     {
-        return explode(',', str_replace('/', '\\', $exclude));
+        $result = [];
+
+        foreach ($exclude as $parent => $child) {
+            if (is_array($child)) {
+                foreach ($child as $item) {
+                    $class = $parent.'/'.$item;
+
+                    array_push($result, str_replace('/', '\\', $class));
+                }
+
+                continue;
+            }
+
+            $class = $parent.'/'.$child;
+
+            array_push($result, str_replace('/', '\\', $class));
+        }
+
+        return $result;
     }
 }

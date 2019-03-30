@@ -24,12 +24,12 @@
   },
   "autoload": {
     "psr-4": {
-      "SymfonyAutoDiYml\\": "src/"
+      "Metglobal\\ServiceHandler\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "SymfonyAutoDiYml\\Tests\\": "tests/"
+      "Metglobal\\ServiceHandler\\Tests\\": "tests/"
     }
   },
   "license": "MIT",
@@ -37,6 +37,10 @@
     {
       "name": "Seyfi Aslan",
       "email": "seyfiaslangecinen@gmail.com"
+    },
+    {
+      "name": "Burak Bolat",
+      "email": "burakbolat@outlook.com"
     }
   ]
 }

@@ -1,23 +1,23 @@
 <?php
 
-namespace SymfonyAutoDiYml\Tests\Finder;
+namespace Metglobal\ServiceHandler\Tests\Finder;
 
 use Doctrine\Common\Annotations\AnnotationReader;
-use SymfonyAutoDiYml\Annotation\Tag;
-use SymfonyAutoDiYml\Finder\AnnotationFinder;
-use SymfonyAutoDiYml\Reflector;
-use SymfonyAutoDiYml\Tests\Fixtures\Annotation\ComplexClass;
-use SymfonyAutoDiYml\Tests\Fixtures\Annotation\ConfigClass;
-use SymfonyAutoDiYml\Tests\Fixtures\Annotation\SimpleClass;
-use SymfonyAutoDiYml\Tests\Fixtures\Annotation\WrongClass;
-use SymfonyAutoDiYml\Tests\BaseTestCase;
+use Metglobal\ServiceHandler\Annotation\Tag;
+use Metglobal\ServiceHandler\Finder\AnnotationFinder;
+use Metglobal\ServiceHandler\Reflector;
+use Metglobal\ServiceHandler\Tests\Fixtures\Annotation\ComplexClass;
+use Metglobal\ServiceHandler\Tests\Fixtures\Annotation\ConfigClass;
+use Metglobal\ServiceHandler\Tests\Fixtures\Annotation\SimpleClass;
+use Metglobal\ServiceHandler\Tests\Fixtures\Annotation\WrongClass;
+use PHPUnit\Framework\TestCase;
 
 /**
- * Depends fixtures class under SymfonyAutoDiYml\Tests\Annotation namespace
+ * Depends fixtures class under Metglobal\ServiceHandler\Tests\Annotation namespace
  *
- * @package SymfonyAutoDiYml\Tests\Finder
+ * @package Metglobal\ServiceHandler\Tests\Finder
  */
-class AnnotationFinderTest extends BaseTestCase
+class AnnotationFinderTest extends TestCase
 {
     /**
      * @throws \Doctrine\Common\Annotations\AnnotationException

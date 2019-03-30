@@ -1,12 +1,12 @@
 <?php
 
-namespace SymfonyAutoDiYml\Finder;
+namespace Metglobal\ServiceHandler\Finder;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
-use SymfonyAutoDiYml\Annotation\DI;
-use SymfonyAutoDiYml\Annotation\Tag;
-use SymfonyAutoDiYml\Reflector;
+use Metglobal\ServiceHandler\Annotation\DI;
+use Metglobal\ServiceHandler\Annotation\Tag;
+use Metglobal\ServiceHandler\Reflector;
 
 class AnnotationFinder
 {

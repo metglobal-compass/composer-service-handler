@@ -1,11 +1,11 @@
 <?php
 
-namespace SymfonyAutoDiYml\Tests\Annotation;
+namespace Metglobal\ServiceHandler\Tests\Annotation;
 
-use SymfonyAutoDiYml\Annotation\Tag;
-use SymfonyAutoDiYml\Tests\BaseTestCase;
+use Metglobal\ServiceHandler\Annotation\Tag;
+use PHPUnit\Framework\TestCase;
 
-class TagTest extends BaseTestCase
+class TagTest extends TestCase
 {
     public function testSuccess()
     {

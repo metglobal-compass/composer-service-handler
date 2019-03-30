@@ -1,6 +1,6 @@
 <?php
 
-namespace SymfonyAutoDiYml\Writer;
+namespace Metglobal\ServiceHandler\Writer;
 
 use Symfony\Component\Yaml\Yaml;
 

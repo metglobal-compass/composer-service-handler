@@ -1,12 +1,12 @@
 <?php
 
-namespace SymfonyAutoDiYml\Tests\Annotation;
+namespace Metglobal\ServiceHandler\Tests\Annotation;
 
-use SymfonyAutoDiYml\Annotation\DI;
-use SymfonyAutoDiYml\Annotation\Tag;
-use SymfonyAutoDiYml\Tests\BaseTestCase;
+use Metglobal\ServiceHandler\Annotation\DI;
+use Metglobal\ServiceHandler\Annotation\Tag;
+use PHPUnit\Framework\TestCase;
 
-class DITest extends BaseTestCase
+class DITest extends TestCase
 {
     public function testYamlConvertion()
     {

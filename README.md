@@ -16,12 +16,12 @@ Minimizing conflict issues occured by single-file  based services.yml dependency
    ```composer require metglobal/symfony-autodi-yaml:dev-master``` 
     
 
-- Add ```SymfonyAutoDiYml\\Builder::buildServicesYml``` command to 2nd position of "post-install-cmd" and "post-update-cmd" list in composer.json. It should look like following:           
+- Add ```Metglobal\\ServiceHandler\\ScriptHandler::buildServices``` command to 2nd position of "symfony-scripts" list in composer.json. It should look like following:
     
         "scripts": {
-            "post-install-cmd": [
+            "symfony-scripts": [
                 "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-                "SymfonyAutoDiYml\\Builder::buildServicesYml",
+                "Metglobal\\ServiceHandler\\ScriptHandler::buildServices",
                 "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
                 "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
                 "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
@@ -29,15 +29,11 @@ Minimizing conflict issues occured by single-file  based services.yml dependency
                 "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
                 "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
             ],
+            "post-install-cmd": [
+                "@symfony-scripts"
+            ],
             "post-update-cmd": [
-                "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-                "SymfonyAutoDiYml\\Builder::buildServicesYml",
-                "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-                "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-                "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-                "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-                "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
-                "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+                "@symfony-scripts"
             ]
         }
         
@@ -48,8 +44,10 @@ Minimizing conflict issues occured by single-file  based services.yml dependency
     `````
     parameters:
         locale: en
-        symfony-yml-builder:
-            bundles: ["ApiBundle"]
+        service_handler:
+            bundles: ['ApiBundle']
+            exclude:
+                ApiBundle: ['Tests']
             
 
 - Change `services.yml` to `services.yml.dist`

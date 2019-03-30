@@ -1,12 +1,12 @@
 <?php
 
-namespace SymfonyAutoDiYml\Annotation;
+namespace Metglobal\ServiceHandler\Annotation;
 
 use Doctrine\Common\Annotations\Annotation;
 
 /**
  * @Annotation
- * @package SymfonyAutoDiYml\Annotation
+ * @package Metglobal\ServiceHandler\Annotation
  */
 class Tag implements YamlConvertable
 {

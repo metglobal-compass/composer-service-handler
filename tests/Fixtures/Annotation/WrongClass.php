@@ -1,12 +1,12 @@
 <?php
 
-namespace SymfonyAutoDiYml\Tests\Fixtures\Annotation;
+namespace Metglobal\ServiceHandler\Tests\Fixtures\Annotation;
 
-use SymfonyAutoDiYml\Annotation\DI;
+use Metglobal\ServiceHandler\Annotation\DI;
 
 /**
  * @DI(id=1)
- * @package SymfonyAutoDiYml\Tests\Annotation
+ * @package Metglobal\ServiceHandler\Tests\Annotation
  */
 class WrongClass
 {

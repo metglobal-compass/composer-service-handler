@@ -1,14 +1,14 @@
 <?php
 
-namespace SymfonyAutoDiYml\Tests\Finder;
+namespace Metglobal\ServiceHandler\Tests\Finder;
 
-use SymfonyAutoDiYml\Annotation\DI;
-use SymfonyAutoDiYml\Finder\AnnotationFinder;
-use SymfonyAutoDiYml\Finder\DependencyFinder;
-use SymfonyAutoDiYml\Finder\PhpClassFinder;
-use SymfonyAutoDiYml\Tests\BaseTestCase;
+use Metglobal\ServiceHandler\Annotation\DI;
+use Metglobal\ServiceHandler\Finder\AnnotationFinder;
+use Metglobal\ServiceHandler\Finder\DependencyFinder;
+use Metglobal\ServiceHandler\Finder\PhpClassFinder;
+use PHPUnit\Framework\TestCase;
 
-class DependencyFinderTest extends BaseTestCase
+class DependencyFinderTest extends TestCase
 {
     /**
      * All of classes has annotations
@@ -48,6 +48,45 @@ class DependencyFinderTest extends BaseTestCase
 
         $dependencyFinder = new DependencyFinder($phpClassFinderMock, $annotationFinderMock);
         $annotations = $dependencyFinder->find("testDir");
+
+        $this->assertEquals(1, count($annotations));
+    }
+
+    /**
+     * Some of class has annotations
+     *
+     * @throws \ReflectionException
+     * @group exclude
+     */
+    public function testExclude()
+    {
+        /*
+            metglobal:
+                service_handler:
+                    bundles:
+                        - 'Gts/ApiBundle'
+                    exclude: { 'Gts/ApiBundle': ['Tests'] }
+         */
+        $phpClassFinderMock = $this->getPhpClassFinderMock(
+            'testDir',
+            [
+                'TestClass', 'Test2Class/Exclude/Me', 'Test2Class/Exclude/Us', 'Test3Class/Exclude/Me', 'Test4Class/Exclude/Me'
+            ]
+        );
+        $annotationFinderMock = $this->getAnnotationFinderMock(
+            [
+                'TestClass' => $this->getSampleDI('di1')
+            ]
+        );
+
+        $exclude = [
+            'Test2Class/Exclude' => ['Me', 'Us'],
+            'Test3Class/Exclude' => ['Me'],
+            'Test4Class/Exclude' => 'Me',
+        ];
+
+        $dependencyFinder = new DependencyFinder($phpClassFinderMock, $annotationFinderMock);
+        $annotations = $dependencyFinder->find('testDir', $exclude);
 
         $this->assertEquals(1, count($annotations));
     }

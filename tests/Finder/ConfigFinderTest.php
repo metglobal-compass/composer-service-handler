@@ -1,13 +1,13 @@
 <?php
 
-namespace SymfonyAutoDiYml\Tests\Finder;
+namespace Metglobal\ServiceHandler\Tests\Finder;
 
-use SymfonyAutoDiYml\Finder\ComposerParser;
-use SymfonyAutoDiYml\Finder\ConfigFinder;
-use SymfonyAutoDiYml\Finder\YamlParser;
-use SymfonyAutoDiYml\Tests\BaseTestCase;
+use Metglobal\ServiceHandler\Finder\ComposerParser;
+use Metglobal\ServiceHandler\Finder\ConfigFinder;
+use Metglobal\ServiceHandler\Finder\YamlParser;
+use PHPUnit\Framework\TestCase;
 
-class ConfigFinderTest extends BaseTestCase
+class ConfigFinderTest extends TestCase
 {
     public function testSuccessfulParsing()
     {
@@ -15,8 +15,9 @@ class ConfigFinderTest extends BaseTestCase
 
         $parsedYaml = [
             "parameters" => [
-                "symfony-yml-builder" => [
-                    "bundles" => ["Gts/ApiBundle"]
+                "service_handler" => [
+                    "bundles" => ["Gts/ApiBundle"],
+                    "exclude" => []
                 ]
             ]
         ];
@@ -44,8 +45,8 @@ class ConfigFinderTest extends BaseTestCase
         $this->assertEquals(
             [
                 'parameters' => [
-                    'symfony-yml-builder' => [
-                        'bundles' => [],
+                    'service_handler' => [
+                        "exclude" => []
                     ]
                 ]
             ],
@@ -62,7 +63,7 @@ class ConfigFinderTest extends BaseTestCase
     {
         $parsedYaml = [
             'parameters' => [
-                'symfony-yml-builder' => [
+                'service_handler' => [
                     'bundles' => "wrongval",
                 ]
             ]
