@@ -1,11 +1,11 @@
 <?php
 
-namespace Metglobal\ServiceHandler\Tests\Fixtures\Annotation;
+namespace Tests\Fixtures\Annotation;
 
-use Metglobal\ServiceHandler\Annotation\DI;
+use Metglobal\ServiceHandler\Annotation\Service;
 
 /**
- * @DI(id="sample_bundle.sample_class")
+ * @Service(id="sample_bundle.sample_class")
  * @package Metglobal\ServiceHandler\Tests\Annotation
  */
 class SimpleClass

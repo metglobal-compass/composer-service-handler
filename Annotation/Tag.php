@@ -8,7 +8,7 @@ use Doctrine\Common\Annotations\Annotation;
  * @Annotation
  * @package Metglobal\ServiceHandler\Annotation
  */
-class Tag implements YamlConvertable
+class Tag implements YamlConvertible
 {
     /**
      * @var string
@@ -33,7 +33,7 @@ class Tag implements YamlConvertable
     /**
      * @inheritDoc
      */
-    public function toYamlArray()
+    public function toYamlArray(): array
     {
         $item = [
             'name' => $this->name,

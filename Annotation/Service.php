@@ -8,7 +8,7 @@ use Doctrine\Common\Annotations\Annotation;
  * @Annotation
  * @Target("CLASS")
  */
-final class DI implements YamlConvertable
+final class Service implements YamlConvertible
 {
     /**
      * @Required
@@ -74,13 +74,23 @@ final class DI implements YamlConvertable
     /**
      * @inheritDoc
      */
-    public function toYamlArray()
+    public function toYamlArray(): array
     {
         $item = [
             'class' => $this->class,
         ];
 
-        $optionalFields = ['arguments', 'factory', 'calls', 'public', 'abstract', 'parent', 'lazy', 'autowire', 'autoconfigure'];
+        $optionalFields = [
+            'arguments',
+            'factory',
+            'calls',
+            'public',
+            'abstract',
+            'parent',
+            'lazy',
+            'autowire',
+            'autoconfigure',
+        ];
 
         foreach ($optionalFields as $field) {
             if ($this->$field !== null) {
@@ -89,9 +99,12 @@ final class DI implements YamlConvertable
         }
 
         if ($this->tags != null) {
-            $item['tags'] = array_map(function (Tag $tag) {
-                return $tag->toYamlArray();
-            }, $this->tags);
+            $item['tags'] = array_map(
+                function (Tag $tag) {
+                    return $tag->toYamlArray();
+                },
+                $this->tags
+            );
         }
 
         return $item;

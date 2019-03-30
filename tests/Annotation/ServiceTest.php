@@ -1,16 +1,16 @@
 <?php
 
-namespace Metglobal\ServiceHandler\Tests\Annotation;
+namespace Tests\Annotation;
 
-use Metglobal\ServiceHandler\Annotation\DI;
+use Metglobal\ServiceHandler\Annotation\Service;
 use Metglobal\ServiceHandler\Annotation\Tag;
 use PHPUnit\Framework\TestCase;
 
-class DITest extends TestCase
+class ServiceTest extends TestCase
 {
     public function testYamlConvertion()
     {
-        $di = new DI();
+        $di = new Service();
         $di->class = "TestBundle\TestService";
         $di->arguments = ['@test_dependency1', '@test_dependency2'];
         $di->factory = ['@test_factory', 'factoryMethod'];
@@ -53,7 +53,7 @@ class DITest extends TestCase
 
     public function testYamlOptionalCases()
     {
-        $di = new DI();
+        $di = new Service();
         $di->class = "TestBundle\TestService";
         $di->arguments = ['@test_dependency1', '@test_dependency2'];
 

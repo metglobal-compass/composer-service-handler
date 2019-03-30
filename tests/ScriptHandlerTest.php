@@ -1,8 +1,7 @@
 <?php
 
-namespace Metglobal\ServiceHandler\Tests;
+namespace Tests;
 
-use Metglobal\ServiceHandler\Finder\ConfigFinder;
 use Metglobal\ServiceHandler\ScriptHandler;
 use PHPUnit\Framework\TestCase;
 
@@ -11,7 +10,6 @@ class ScriptHandlerTest extends TestCase
     private $event;
     private $io;
     private $package;
-    private $configFinder;
 
     protected function setUp()
     {
@@ -30,13 +28,8 @@ class ScriptHandlerTest extends TestCase
     /**
      * @dataProvider provideInvalidConfiguration
      */
-    public function InvalidConfiguration(array $config, $exceptionMessage)
+    public function testInvalidConfiguration(array $config, $exceptionMessage)
     {
-        $this->configFinder = $this->getConfigFinderMock(
-            $config['parameters']['service_handler']['bundles'],
-            $config['parameters']['service_handler']['exclude']
-        );
-
         if (method_exists($this, 'expectException')) {
             $this->expectException('InvalidArgumentException');
             $this->expectExceptionMessage($exceptionMessage);
@@ -50,43 +43,24 @@ class ScriptHandlerTest extends TestCase
     public function provideInvalidConfiguration()
     {
         return [
-            'no bundles config' => [
-                [
-                    'parameters' => [
-                        'service_handler' => [
-                            'bundles' => [],
-                            'exclude' => [],
-                        ],
-                    ],
-                ],
-                'The parameters.service_handler.bundles setting is required to use this script handler.',
+            'no composer config' => [
+                [],
+                'The service handler needs to be configured through the extra.metglobal-services setting.',
             ],
-            'no exclude config' => [
-                [
-                    'parameters' => [
-                        'service_handler' => [
-                            'bundles' => ['TestBundle'],
-                            'exclude' => [],
-                        ],
-                    ],
-                ],
-                'The parameters.service_handler.exclude setting is required to use this script handler.',
-            ],
+//            'no valid composer config' => [
+//                [
+//                    'metglobal-services' => '',
+//                ],
+//                'The extra.metglobal-services setting must be an array or a configuration object.',
+//            ],
+//            'no valid composer config as array' => [
+//                [
+//                    'metglobal-services' => [
+//                        '',
+//                    ],
+//                ],
+//                'The extra.metglobal-services setting must be an array of configuration objects.',
+//            ],
         ];
-    }
-
-    private function getConfigFinderMock($bundles, $exclude)
-    {
-        $configFinderMock = $this
-            ->getMockBuilder(ConfigFinder::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $configFinderMock
-            ->expects($this->exactly(1))
-            ->method("getConfigYml")
-            ->willReturn(['parameters' => ['service_handler' => ['bundles' => $bundles, 'exclude' => $exclude]]]);
-
-        return $configFinderMock;
     }
 }
