@@ -11,7 +11,6 @@ use Doctrine\Common\Annotations\Annotation;
 final class Service implements YamlConvertible
 {
     /**
-     * @Required
      * @var string
      */
     public $id;
@@ -76,9 +75,12 @@ final class Service implements YamlConvertible
      */
     public function toYamlArray(): array
     {
-        $item = [
-            'class' => $this->class,
-        ];
+        $item = [];
+
+        // If class property defined set it. Because class not required.
+        if ($this->class) {
+            $item['class'] = $this->class;
+        }
 
         $optionalFields = [
             'arguments',
@@ -98,7 +100,7 @@ final class Service implements YamlConvertible
             }
         }
 
-        if ($this->tags != null) {
+        if ($this->tags !== null) {
             $item['tags'] = array_map(
                 function (Tag $tag) {
                     return $tag->toYamlArray();

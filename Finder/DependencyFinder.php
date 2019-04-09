@@ -14,31 +14,57 @@ class DependencyFinder
         $this->annotationFinder = $annotationFinder;
     }
 
-    public function find(string $dir, $exclude = null): array
+    public function find(string $bundle, string $dir, $exclude = null): array
     {
         if (null !== $exclude) {
-            list($dir, $exclude) = $this->parseExclude($exclude);
+            list($dir, $exclude) = $this->parseExclude($bundle, $exclude);
         }
 
         $files = $this->getFiles($dir, $exclude);
 
         $annotations = [];
         foreach ($files->getIterator() as $file) {
-            if ($annotation = $this->annotationFinder->findServiceAnnotation($this->getClassName($file))) {
-                $annotations[$annotation->id] = $annotation;
+            $className = $this->getClassName($file, false);
+
+            if ($annotation = $this->annotationFinder->findServiceAnnotation($className)) {
+                $id = $annotation->id;
+
+                // If id not defined, define self class name as id.
+                if (!$id) {
+                    $id = $className;
+                }
+
+                // If id not equals to class name (an alias used for id), set annotation class.
+                if ($id != $className) {
+                    $annotation->class = $className;
+                }
+
+                $annotations[$id] = $annotation;
             }
         }
 
         return $annotations;
     }
 
-    private function parseExclude($exclude): array
+    private function parseExclude(string $bundle, $exclude): array
     {
         $basePath = strstr($exclude, '{', true);
         $excludedPaths = [];
 
         if (preg_match('/{(.*?)}/', $exclude, $matches, PREG_OFFSET_CAPTURE)) {
             $excludedPaths = explode(',', $matches[1][0]);
+
+            // Add bundle name
+            $excludedPaths = array_map(
+                function ($excludedPath) use ($bundle) {
+                    if ($ext = pathinfo($excludedPath, PATHINFO_EXTENSION)) {
+                        return $bundle.$excludedPath;
+                    }
+
+                    return $bundle.$excludedPath.'\\';
+                },
+                $excludedPaths
+            );
         }
 
         return [
@@ -53,31 +79,57 @@ class DependencyFinder
 
         $files = $finder->files()->in($dir)->name('*.php');
 
-        // Exclude directories
-        if ($exclude) {
-            $files->exclude($exclude);
-        }
+        // Service folders an files
+        $files = $files->filter(
+            function (SplFileInfo $file) use ($exclude) {
+                $className = $this->getClassName($file, true);
 
-        // Exclude files
-        foreach ($exclude as $excludedPath) {
-            $ext = pathinfo($excludedPath, PATHINFO_EXTENSION);
+                // Service folders an files
+                if ($this->startsWith($className, $exclude) || $this->endsWith($className, $exclude)) {
+                    return false;
+                }
 
-            if ($ext) {
-                $files->notPath($excludedPath);
+                return true;
             }
-        }
+        );
 
         return $files;
     }
 
-    private function getClassName(SplFileInfo $file): string
+    private function getClassName(SplFileInfo $file, $ext = true): string
     {
-        $className = "\\".str_replace(".php", "", $file->getFilename());
+        $className = '\\'.$file->getFilename();
 
-        if (preg_match("/namespace(.*);/", $file->getContents(), $matches)) {
+        if (!$ext) {
+            $className = '\\'.str_replace('.php', '', $file->getFilename());
+        }
+
+        if (preg_match('/namespace(.*);/', $file->getContents(), $matches)) {
             $className = trim($matches[1]).$className;
         }
 
         return $className;
+    }
+
+    private function startsWith($haystack, $needles)
+    {
+        foreach ((array)$needles as $needle) {
+            if ($needle !== '' && substr($haystack, 0, strlen($needle)) === (string)$needle) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function endsWith($haystack, $needles)
+    {
+        foreach ((array)$needles as $needle) {
+            if (substr($haystack, -strlen($needle)) === (string)$needle) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

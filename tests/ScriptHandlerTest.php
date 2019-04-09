@@ -28,8 +28,12 @@ class ScriptHandlerTest extends TestCase
     /**
      * @dataProvider provideInvalidConfiguration
      */
-    public function testInvalidConfiguration(array $config, $exceptionMessage)
+    public function testInvalidConfiguration(array $extras, $exceptionMessage)
     {
+        $this->package->getExtra()->willReturn($extras);
+
+        chdir(__DIR__);
+
         if (method_exists($this, 'expectException')) {
             $this->expectException('InvalidArgumentException');
             $this->expectExceptionMessage($exceptionMessage);
@@ -43,24 +47,24 @@ class ScriptHandlerTest extends TestCase
     public function provideInvalidConfiguration()
     {
         return [
-            'no composer config' => [
+            'no extra' => [
                 [],
                 'The service handler needs to be configured through the extra.metglobal-services setting.',
             ],
-//            'no valid composer config' => [
-//                [
-//                    'metglobal-services' => '',
-//                ],
-//                'The extra.metglobal-services setting must be an array or a configuration object.',
-//            ],
-//            'no valid composer config as array' => [
-//                [
-//                    'metglobal-services' => [
-//                        '',
-//                    ],
-//                ],
-//                'The extra.metglobal-services setting must be an array of configuration objects.',
-//            ],
+            'invalid type' => [
+                [
+                    'metglobal-services' => 'not an array',
+                ],
+                'The extra.metglobal-services setting must be an array or a configuration object.',
+            ],
+            'invalid type for multiple file' => [
+                [
+                    'metglobal-services' => [
+                        'not an array',
+                    ],
+                ],
+                'The extra.metglobal-services setting must be an array of configuration objects.',
+            ],
         ];
     }
 }

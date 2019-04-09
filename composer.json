@@ -29,7 +29,9 @@
   },
   "autoload-dev":  {
     "psr-4": {
-      "Tests\\": "tests/"
+      "Tests\\": "tests/",
+      "TestBundle\\": "tests/Functional/Bundle/TestBundle",
+      "Acme\\TestBundle\\": "tests/Functional/Bundle/Acme/TestBundle"
     }
   },
   "license": "MIT",

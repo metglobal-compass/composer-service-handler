@@ -28,12 +28,13 @@ class Processor
 
         $parameters = $this->processParameters($baseServiceValues['parameters']);
 
-        $serviceHandlers = $baseServiceValues['parameters']['service_handler'] ?? [];
+        $serviceHandlers = $parameters['service_handler'] ?? [];
 
         $dependencyFinder = new DependencyFinder(
             new AnnotationFinder(new AnnotationReader())
         );
 
+        $services = [];
         foreach ($serviceHandlers as $bundle => $paths) {
             // Now exclude AppBundle temporarily
             if ('AppBundle' == $bundle) {
@@ -52,7 +53,7 @@ class Processor
                 function (Service $dependency) {
                     return $dependency->toYamlArray();
                 },
-                $dependencyFinder->find($dir, $exclude)
+                $dependencyFinder->find($bundle, $dir, $exclude)
             );
 
             if (empty($dependencies)) {
@@ -89,7 +90,11 @@ class Processor
             $content = Yaml::dump($distFileContent, 4, 4, true);
 
             \file_put_contents($realFile, $content);
+
+            $services[$bundle] = $distFileContent;
         }
+
+        return $services;
     }
 
     private function processConfig(array $config): array

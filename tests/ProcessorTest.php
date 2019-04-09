@@ -27,6 +27,8 @@ class ProcessorTest extends TestCase
      */
     public function testInvalidConfiguration(array $config, $exceptionMessage)
     {
+        chdir(__DIR__);
+
         if (method_exists($this, 'expectException')) {
             $this->expectException('InvalidArgumentException');
             $this->expectExceptionMessage($exceptionMessage);
@@ -44,33 +46,24 @@ class ProcessorTest extends TestCase
                 [],
                 'The extra.metglobal-services.file setting is required to use this script handler.',
             ],
-//            'no config parameters' => [
-//                [
-//                    'parameters' => [],
-//                ],
-//                'The parameters.service_handler setting is required to use this script handler.',
-//            ],
-//            'no valid config parameters' => [
-//                [
-//                    'parameters' => [
-//                        'service_handler' => [
-//                            'TestBundle\\' => [],
-//                        ],
-//                    ],
-//                ],
-//                'The parameters.service_handler.bundles setting is required to use this script handler.',
-//            ],
-//            'no exclude config parameters' => [
-//                [
-//                    'parameters' => [
-//                        'service_handler' => [
-//                            'TestBundle\\' => [],
-//                            'exclude' => [],
-//                        ],
-//                    ],
-//                ],
-//                'The parameters.service_handler.exclude setting is required to use this script handler.',
-//            ],
+            'no config parameters' => [
+                [
+                    'file' => 'Fixtures/Files/invalid_existing_service_handler.yaml',
+                ],
+                'The parameters.service_handler setting is required to use this script handler.',
+            ],
+            'no valid config parameters' => [
+                [
+                    'file' => 'Fixtures/Files/invalid_existing_bundle.yaml',
+                ],
+                'The parameters.service_handler.resource setting is required to use this script handler.',
+            ],
+            'no exclude config parameters' => [
+                [
+                    'file' => 'Fixtures/Files/invalid_existing_bundle_values.yaml',
+                ],
+                'The parameters.service_handler.exclude setting is required to use this script handler.',
+            ],
         ];
     }
 }
