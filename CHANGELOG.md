@@ -1,3 +1,6 @@
+## 0.2.0 (April 10, 2019)
+  - Moved required tag for service Id and completed functional tests
+
 ## 0.1.0 (March 30, 2019)
   - Change branch alias to 0.1.x-dev
   - Refactor service handler remove unnecessary classes
