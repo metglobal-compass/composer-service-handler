@@ -22,20 +22,11 @@ class AnnotationFinder
 
     public function findServiceAnnotation($className)
     {
-        try {
-            $reflectionClass = new \ReflectionClass($className);
+        $reflectionClass = new \ReflectionClass($className);
 
-            /** @var Service $annotation */
-            $annotation = $this->annotationReader->getClassAnnotation($reflectionClass, Service::class);
+        /** @var Service $annotation */
+        $annotation = $this->annotationReader->getClassAnnotation($reflectionClass, Service::class);
 
-            // Set self class name if annotation class field is null
-            if ($annotation != null && $annotation->class == null) {
-                $annotation->class = $className;
-            }
-
-            return $annotation;
-        } catch (\ReflectionException $e) {
-            return null;
-        }
+        return $annotation;
     }
 }

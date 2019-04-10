@@ -1,0 +1,27 @@
+services:
+    Acme\TestBundle\Mailer\MailManager:
+        arguments:
+            - '%kernel.debug%'
+    Acme\TestBundle\Service\BarService:
+        public: true
+        autowire: true
+        autoconfigure: false
+    test.baz_service:
+        class: Acme\TestBundle\Service\BazService
+        public: true
+        autowire: true
+        autoconfigure: false
+    Acme\TestBundle\Service\Mailer\FooMailManager:
+        public: true
+        parent: Acme\TestBundle\Mailer\MailManager
+        autowire: true
+        autoconfigure: false
+    Acme\TestBundle\Service\FooService:
+        public: true
+        autowire: true
+        autoconfigure: false
+    Acme\TestBundle\EventListener\FooControllerListener:
+        arguments:
+            - '@service_container'
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
