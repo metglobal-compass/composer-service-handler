@@ -1,3 +1,6 @@
+## 0.3.0 (January 30, 2020)
+  - Fix argument type casting
+
 ## 0.2.0 (April 10, 2019)
   - Moved required tag for service Id and completed functional tests
 
