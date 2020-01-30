@@ -26,7 +26,7 @@ class Processor
 
         $baseServiceValues = Yaml::parse(\file_get_contents($config['file']));
 
-        $parameters = $this->processParameters($baseServiceValues['parameters']);
+        $parameters = $this->processParameters((array)$baseServiceValues['parameters']);
 
         $serviceHandlers = $parameters['service_handler'] ?? [];
 
