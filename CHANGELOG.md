@@ -1,3 +1,6 @@
+## 0.4.0 (January 31, 2020)
+  - Update composer dependencies
+
 ## 0.3.0 (January 30, 2020)
   - Fix argument type casting
 
