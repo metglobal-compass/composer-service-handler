@@ -10,12 +10,12 @@
   "require": {
     "php": ">=7.0",
     "doctrine/annotations": "^1.4",
-    "symfony/yaml": "^3.4|^4.4",
-    "symfony/finder": "^3.4|^4.4"
+    "symfony/yaml": "~5.0",
+    "symfony/finder": "~5.0"
   },
   "require-dev": {
     "composer/composer": "^1.0",
-    "phpunit/phpunit": "^5.0"
+    "phpunit/phpunit": "^6.0"
   },
   "extra": {
     "branch-alias": {
