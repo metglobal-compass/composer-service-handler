@@ -60,10 +60,8 @@ class Processor
                 continue;
             }
 
-            $target = 'Resources/config/services.yml';
-
             // Read yaml dist
-            $realFile = $dir.$target;
+            $realFile = $dir.$config['output'];
             $distFile = $realFile.'.dist';
 
             if (!is_file($distFile)) {
@@ -84,7 +82,7 @@ class Processor
             $distFileContent['services'] = array_merge((array)$distFileContent['services'], $dependencies);
 
             $this->io->write(
-                sprintf('<info>Updating the "%s%s" file</info>', str_replace('\\', '/', $bundle), $target)
+                sprintf('<info>Updating the "%s%s" file</info>', str_replace('\\', '/', $bundle), $config['output'])
             );
 
             $content = Yaml::dump($distFileContent, 4, 4, true);
@@ -102,6 +100,12 @@ class Processor
         if (empty($config['file'])) {
             throw new \InvalidArgumentException(
                 'The extra.metglobal-services.file setting is required to use this script handler.'
+            );
+        }
+
+        if (empty($config['output'])) {
+            throw new \InvalidArgumentException(
+                'The extra.metglobal-services.output setting is required to use this script handler.'
             );
         }
 
