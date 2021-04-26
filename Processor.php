@@ -60,10 +60,8 @@ class Processor
                 continue;
             }
 
-            $target = 'Resources/config/services.yml';
-
             // Read yaml dist
-            $realFile = $dir.$target;
+            $realFile = $config['output'] ?? $dir . 'Resources/config/services.yml';
             $distFile = $realFile.'.dist';
 
             if (!is_file($distFile)) {
@@ -84,7 +82,7 @@ class Processor
             $distFileContent['services'] = array_merge((array)$distFileContent['services'], $dependencies);
 
             $this->io->write(
-                sprintf('<info>Updating the "%s%s" file</info>', str_replace('\\', '/', $bundle), $target)
+                sprintf('<info>Updating the "%s%s" file</info>', str_replace('\\', '/', $bundle), $realFile)
             );
 
             $content = Yaml::dump($distFileContent, 4, 4, true);
