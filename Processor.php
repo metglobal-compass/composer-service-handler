@@ -61,13 +61,12 @@ class Processor
             }
 
             // Read yaml dist
-            $realFile = $dir.$config['output'];
-            $distFile = $realFile.'.dist';
+            $distFile = $config['output'] . '.dist';
 
             if (!is_file($distFile)) {
-                $this->io->write(sprintf('<info>Copying the "%s" file to "%s"</info>', $realFile, $distFile));
+                $this->io->write(sprintf('<info>Copying the "%s" file to "%s"</info>', $config['output'], $distFile));
 
-                \copy($realFile, $distFile);
+                \copy($config['output'], $distFile);
 
                 continue;
             }
@@ -87,7 +86,7 @@ class Processor
 
             $content = Yaml::dump($distFileContent, 4, 4, true);
 
-            \file_put_contents($realFile, $content);
+            \file_put_contents($config['output'], $content);
 
             $services[$bundle] = $distFileContent;
         }
