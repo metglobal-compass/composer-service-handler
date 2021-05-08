@@ -1,7 +1,7 @@
 ### Symfony annotation-based services.yml generator
 
 ##### Use Case
-Minimizing conflict issues occured by single-file  based services.yml 
+Minimizing conflict issues occurred by single-file  based services.yml 
 dependency injections
 ### Installation
         
@@ -11,26 +11,22 @@ dependency injections
     
 
 2. Add ```Metglobal\\ServiceHandler\\ScriptHandler::buildServices``` 
-command to after ```Incenteev\\ParameterHandler\\ScriptHandler::buildParameters``` 
-of "symfony-scripts" list in composer.json. It should look like following:
+command of "symfony-scripts" list in composer.json. It should look like 
+   following:
     
         "scripts": {
-            "symfony-scripts": [
-                "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-                "Metglobal\\ServiceHandler\\ScriptHandler::buildServices",
-                "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-                "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-                "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-                "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-                "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
-                "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
-            ],
+            ...
             "post-install-cmd": [
-                "@symfony-scripts"
+               "Metglobal\\ServiceHandler\\ScriptHandler::buildServices",
+               "@auto-scripts"
             ],
             "post-update-cmd": [
-                "@symfony-scripts"
-            ]
+               "Metglobal\\ServiceHandler\\ScriptHandler::buildServices",
+               "@auto-scripts"
+            ],
+            "post-autoload-dump": [
+               "Metglobal\\ServiceHandler\\ScriptHandler::buildServices"
+            ],
         }
         
         
@@ -42,9 +38,9 @@ app folder
     parameters:
         locale: en
         service_handler:
-            AcmeBundle\:
-                resource: '../../src/AcmeBundle/*'
-                exclude: '../../src/AcmeBundle/{Controller,Entity,Exclude,Repository,Tests,AcmeBundle.php}'
+            App\:
+                resource: 'src/'
+                exclude: 'src/{Controller,Entity,Exclude,Repository,Kernel.php}'
 
 
 
@@ -54,18 +50,10 @@ section as `metglobal-services`
     `composer.json`
     `````
     "extra": {
-        "symfony-app-dir": "app",
-        "symfony-bin-dir": "bin",
-        "symfony-var-dir": "var",
-        "symfony-web-dir": "web",
-        "symfony-assets-install": "relative",
-        "incenteev-parameters": {
-            "file": "app/config/parameters.yml"
-        },
-        "metglobal-services": {
-            "file": "app/config/services.yml"
-        },
-        "branch-alias": null
+         ...
+         "metglobal-services": {
+            "file": "config/services.yaml"
+         }
     }
 
 5. Add `services.yml` to .gitignore
@@ -77,17 +65,17 @@ services.yml will be auto-generated after each each execution
 
 Usage of `@Service` annotation at repository class
 ````php
-namespace AcmeBundle\Repository;
+namespace App\Repository;
 
 use Metglobal\ServiceHandler\Annotation\Service;
 
 /**
  * @Service(
- *     id="acme.repository.my_repository",
+ *     id="app.repository.my_repository",
  *     factory= {"@doctrine.orm.default_entity_manager", "getRepository"},
- *     arguments={"AcmeBundle:MyEntity"},
+ *     arguments={"App:MyEntity"},
  *     calls={
- *          {"setSender", {"@AcmeBundle\Mailer\Sender"}}
+ *          {"setSender", {"@App\Mailer\Sender"}}
  *     }
  *    )
  */
@@ -98,17 +86,17 @@ class MyRepository {
 
 Usage of `@Service` annotation at event listener class
 ````php
-namespace AcmeBundle\EventListener;
+namespace App\EventListener;
 
 use Metglobal\ServiceHandler\Annotation\Service;
 use Metglobal\ServiceHandler\Annotation\Tag;
 
 /**
  * @Service(
- *     id="acme.event_listener.my_listener",
+ *     id="app.event_listener.my_listener",
  *     arguments={
- *          "@AcmeBundle\Repository\MyRepository",
- *          "@AcmeBundle\Mailer\Sender"     
+ *          "@App\Repository\MyRepository",
+ *          "@App\Mailer\Sender"     
  *     },
  *     tags={
  *          @Tag(name="kernel.event_listener", event="success", method="onSuccess"),
