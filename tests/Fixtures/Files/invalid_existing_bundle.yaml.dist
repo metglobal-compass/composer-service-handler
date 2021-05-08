@@ -1,0 +1,3 @@
+parameters:
+    service_handler:
+      App\: []

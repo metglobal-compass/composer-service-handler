@@ -22,11 +22,15 @@ class Processor
     {
         $config = $this->processConfig($config);
 
-        $baseDir = \dirname($config['file']);
+        // Read yaml dist
+        $realFile = $config['file'];
+        $distFile = $realFile.'.dist';
 
-        $baseServiceValues = Yaml::parse(\file_get_contents($config['file']));
+        $baseServiceValues = Yaml::parse(\file_get_contents($distFile));
 
-        $parameters = $this->processParameters((array)$baseServiceValues['parameters']);
+        if (isset($baseServiceValues['parameters'])) {
+            $parameters = $this->processParameters((array)$baseServiceValues['parameters']);
+        }
 
         $serviceHandlers = $parameters['service_handler'] ?? [];
 
@@ -35,17 +39,13 @@ class Processor
         );
 
         $services = [];
+        // TODO: remove loop
         foreach ($serviceHandlers as $bundle => $paths) {
-            // Now exclude AppBundle temporarily
-            if ('AppBundle' == $bundle) {
-                continue;
-            }
-
-            $dir = trim($baseDir.'/'.$paths['resource'], '*');
+            $dir = $paths['resource'];
 
             $exclude = null;
             if (isset($paths['exclude'])) {
-                $exclude = $baseDir.'/'.$paths['exclude'];
+                $exclude = $paths['exclude'];
             }
 
             // Find dependencies and cast to array for yaml convertion
@@ -59,12 +59,6 @@ class Processor
             if (empty($dependencies)) {
                 continue;
             }
-
-            $target = 'Resources/config/services.yml';
-
-            // Read yaml dist
-            $realFile = $dir.$target;
-            $distFile = $realFile.'.dist';
 
             if (!is_file($distFile)) {
                 $this->io->write(sprintf('<info>Copying the "%s" file to "%s"</info>', $realFile, $distFile));
@@ -84,7 +78,7 @@ class Processor
             $distFileContent['services'] = array_merge((array)$distFileContent['services'], $dependencies);
 
             $this->io->write(
-                sprintf('<info>Updating the "%s%s" file</info>', str_replace('\\', '/', $bundle), $target)
+                sprintf('<info>Updating the "%s" file</info>', $realFile)
             );
 
             $content = Yaml::dump($distFileContent, 4, 4, true);

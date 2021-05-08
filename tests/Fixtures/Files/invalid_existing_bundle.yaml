@@ -1,3 +1,0 @@
-parameters:
-    service_handler:
-      TestBundle\: []

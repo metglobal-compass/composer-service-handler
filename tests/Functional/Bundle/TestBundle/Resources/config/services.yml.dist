@@ -1,8 +1,0 @@
-services:
-#    test.example:
-#        class: TestBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
-
-    TestBundle\Mailer\MailManager:
-        arguments:
-            - '%kernel.debug%'
