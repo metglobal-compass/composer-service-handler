@@ -8,18 +8,18 @@
     "service injection"
   ],
   "require": {
-    "php": ">=7.0",
+    "php": ">=7.2.5",
     "doctrine/annotations": "^1.4",
-    "symfony/yaml": "^3.4|^4.4",
-    "symfony/finder": "^3.4|^4.4"
+    "symfony/yaml": "^5.2",
+    "symfony/finder": "^5.2"
   },
   "require-dev": {
-    "composer/composer": "^1.0",
-    "phpunit/phpunit": "^5.0"
+    "composer/composer": "^2.0",
+    "phpunit/phpunit": "^7.0"
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "0.1.x-dev"
+      "dev-master": "1.0.x-dev"
     }
   },
   "autoload": {
@@ -30,8 +30,7 @@
   "autoload-dev":  {
     "psr-4": {
       "Tests\\": "tests/",
-      "TestBundle\\": "tests/Functional/Bundle/TestBundle",
-      "Acme\\TestBundle\\": "tests/Functional/Bundle/Acme/TestBundle"
+      "App\\": "tests/Functional/src"
     }
   },
   "license": "MIT",
