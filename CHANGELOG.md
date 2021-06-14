@@ -1,3 +1,6 @@
+## 1.0.1 (June 14, 2021)
+  - Add backward compatibility for symfony old versions 3 and 4
+
 ## 1.0.0 (May 08, 2021)
   - Update README for symfony 5
   - Upgrade for Symfony 5
