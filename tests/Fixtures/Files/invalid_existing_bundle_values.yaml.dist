@@ -1,0 +1,5 @@
+parameters:
+    service_handler:
+      App\:
+          resource: 'src/'
+          exclude: ''

@@ -1,5 +1,0 @@
-parameters:
-    service_handler:
-      TestBundle\:
-          resource: '../../src/TestBundle/*'
-          exclude: ''
